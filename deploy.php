@@ -59,6 +59,8 @@ if($change_happened){
 	#git pull changes
 	chdir($dir);
 	exec("git pull");
+	exec("chown www-data:web * -R");
+	exec("chmod 775 * -R");
 	chdir($original_dir);
 	
 	die("Changes applied from branch: " . $branch);

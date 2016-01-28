@@ -60,6 +60,8 @@ if($change_happened){
 	chdir($dir);
 	exec("git pull");
 	chdir($original_dir);
+	
+	die("Changes applied from branch: " . $branch);
 }
 else{
 	die("Apparently there is nothing to update for this branch\n");

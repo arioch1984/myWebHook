@@ -57,13 +57,20 @@ if($change_happened){
 	$original_dir = getcwd();
 	
 	#git pull changes
+	$command_output = array();
+	$command_executed = 0;
 	chdir($dir);
-	$command_output = passthru("git pull");
-	exec("chown www-data:web * -R");
-	exec("chmod 775 * -R");
-	chdir($original_dir);
-	
-	die("Changes applied from branch: " . $branch . "\nCommand output:\n" . $command_output);
+	exec("git pull", $command_output, $command_executed);
+	if($command_executed){
+		exec("chown www-data:web * -R");
+		exec("chmod 775 * -R");
+		chdir($original_dir);
+
+		die("Changes applied from branch: " . $branch . "\nCommand output:\n" . implode('\n', $command_output));
+	}
+	else{
+		die("Command git pull not executed");
+	}
 }
 else{
 	die("Apparently there is nothing to update for this branch\n");

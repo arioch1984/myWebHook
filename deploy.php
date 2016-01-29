@@ -58,12 +58,12 @@ if($change_happened){
 	
 	#git pull changes
 	chdir($dir);
-	exec("git pull");
+	$command_output = passthru("git pull");
 	exec("chown www-data:web * -R");
 	exec("chmod 775 * -R");
 	chdir($original_dir);
 	
-	die("Changes applied from branch: " . $branch);
+	die("Changes applied from branch: " . $branch . "\nCommand output:\n" . $command_output);
 }
 else{
 	die("Apparently there is nothing to update for this branch\n");

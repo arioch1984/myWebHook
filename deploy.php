@@ -21,6 +21,11 @@ $ip = $_SERVER['REMOTE_ADDR'];
 $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
 $change_happened = false;
 
+#Trust only Bitbucket IP addresses
+if(strpos($ip,'104.192.143.') === false){
+	die('Request not sended from Bitbucket<br/><img src="http://vignette2.wikia.nocookie.net/jurassicpark/images/5/5f/YouDidn\'tSayTheMagicWord.gif/revision/latest?cb=20111128234450" />');
+}
+
 # Receive POST data
 $payload = json_decode(file_get_contents('php://input'), true);
 

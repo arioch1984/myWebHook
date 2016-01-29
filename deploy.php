@@ -58,14 +58,12 @@ if($change_happened){
 	
 	#git pull changes
 	$command_output = array();
-	$command_executed = 0;
+	$command_executed = 1;
 	chdir($dir);
 	exec("git pull", $command_output, $command_executed);
-	if($command_executed){
-		exec("chown www-data:web * -R");
-		exec("chmod 775 * -R");
-		chdir($original_dir);
+	chdir($original_dir);
 
+	if(!$command_executed){
 		die("Changes applied from branch: " . $branch . "\nCommand output:\n" . implode('\n', $command_output));
 	}
 	else{

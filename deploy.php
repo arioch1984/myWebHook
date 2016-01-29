@@ -64,7 +64,7 @@ if($change_happened){
 	chdir($original_dir);
 
 	if(!$command_executed){
-		die("Changes applied from branch: " . $branch . "\nCommand output:\n" . implode('\n', $command_output));
+		die("Changes applied from branch: " . $branch . "\nCommand output:\n" . implode(PHP_EOL, $command_output));
 	}
 	else{
 		die("Command git pull not executed");
